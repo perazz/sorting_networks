@@ -1,11 +1,11 @@
 #pragma once
 
-#ifdef VECTORCLASS_H
-#define NETWORK_SORT_SIMD_AVAILABLE
+//#ifdef VECTORCLASS_H
+//#define NETWORK_SORT_SIMD_AVAILABLE
 
-#include <array> // std::array for reordering data ready for simd sorting
+//#include <array> // std::array for reordering data ready for simd sorting
 
-#endif
+//#endif
 
 #include <utility>
 
@@ -183,6 +183,21 @@ public:
     a.output_str << "SWAP(" << a.place << ", " << b.place << ");\n";
   }
 };
+
+// Output a Fortran subroutine call to swap two elements to an output stream
+template <class OS> class OutputSwapFortran {
+public:
+  using Lane = typename OutputContainerPassthrough<OS>::Lane;
+  OutputSwapFortran(Lane a, Lane b, bool with_list = false) {
+    if (with_list) {
+       a.output_str << "        call a_lt_b_andlist(x("<<a.place+1<<"),x("<<b.place+1<<"),"
+                    <<                 "list("<<a.place+1<<"),list("<<b.place+1<<"))  \n";
+    } else {
+       a.output_str << "        call a_lt_b(x("<<a.place+1<<"),x("<<b.place+1<<"))  \n";
+    }
+  }
+};
+
 
 // Does not perform swapping, but instead outputs characters representing the
 // swap to an output stream

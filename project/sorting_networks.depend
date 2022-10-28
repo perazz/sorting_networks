@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1666894553 source:/Users/federico/code/sorting_networks/project/main.cpp
+
+1666901259 source:/Users/federico/code/sorting_networks/examples/generator.cpp
+	<cstring>
+	<iostream>
+	"../include/sorting_networks.h"
+
+1666899966 /Users/federico/code/sorting_networks/include/sorting_networks.h
+	<utility>
+
